@@ -1,0 +1,48 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam classFontStyle italic
+
+class Camera {
+  - String id
+  - String location
+  - String ipAddress
+  - boolean isOnline
+  --
+  + startStream(): void
+  + stopStream(): void
+  + captureSnapshot(): Image
+}
+
+class Lock {
+  - String id
+  - String location
+  - boolean isLocked
+  --
+  + lock(): void
+  + unlock(): void
+  + toggle(): void
+}
+
+class AccessLog {
+  - String id
+  - String deviceId
+  - String userId
+  - DateTime timestamp
+  - String action
+  --
+  + toString(): String
+}
+
+class SecurityController {
+  --
+  + getCameraStatus(id: String): boolean
+  + openGate(deviceId: String): void
+  + logAccess(userId: String, action: String): void
+}
+
+Camera "1" -- "0..*" AccessLog 
+Lock "1" -- "0..*" AccessLog
+SecurityController --> Camera 
+SecurityController --> Lock 
+SecurityController --> AccessLog
+@enduml
