@@ -1,8 +1,6 @@
 @startuml
 !includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
 
-LAYOUT_WITH_LEGEND()
-
 Container_Boundary(automationService, "Automation (Scenario) Service") {
 
   Component(scenarioAPI, "Scenario API", "Go", "REST API для создания и управления пользовательскими сценариями")
@@ -12,7 +10,6 @@ Container_Boundary(automationService, "Automation (Scenario) Service") {
   Component(scenarioDb, "Automation DB", "PostgreSQL", "Хранит сценарии, условия, действия и расписания")
 }
 
-' Взаимодействия компонентов
 Rel(scenarioAPI, scenarioRepository, "Создаёт/обновляет сценарии")
 Rel(triggerEngine, scenarioRepository, "Читает условия сценариев")
 Rel(triggerEngine, actionExecutor, "Передаёт команды для выполнения")
