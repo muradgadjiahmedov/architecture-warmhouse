@@ -160,13 +160,13 @@
 
 2) [Healting Service](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/component/Heating%20Service.puml)
 
-3) [Telemetry Service](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/component/Telemetry20Service.puml)
+3) [Telemetry Service](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/component/Telemetry%20Service.puml)
 
-4) [Automation Service](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/component/Automation20Service.puml)
+4) [Automation Service](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/component/Automation%20Service.puml)
 
-5) [Device Service](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/component/Device20Service.puml)
+5) [Device Service](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/component/Device%20Service.%20puml)
 
-6) [Security Service](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/component/Security20Service.puml)
+6) [Security Service](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/component/Security%20Service.puml)
 
 **Диаграмма кода (Code)**
 
