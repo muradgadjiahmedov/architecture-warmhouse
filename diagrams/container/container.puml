@@ -1,0 +1,69 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(user, "User", "Homeowner using the smart home system via Web or Mobile")
+Person(technician, "Support Technician", "Helps with device setup and diagnostics")
+
+System_Ext(vendorPlatform, "Device Vendor Platform", "External partner platform for IoT device provisioning")
+
+System_Boundary(smartHome, "SmartHome SaaS Platform") {
+
+  Container(webApp, "Web Application", "React / TypeScript", "User interface for desktop access")
+  Container(mobileApp, "Mobile App", "Flutter / Kotlin", "User interface for mobile access")
+  Container(apiGateway, "API Gateway", "NGINX / Kong", "Entry point routing requests to services")
+  
+  Container(authService, "Auth Service", "Go", "Handles registration, login, roles, permissions")
+  ContainerDb(authDb, "Auth DB", "PostgreSQL", "Stores users, roles, tokens")
+  
+  Container(deviceService, "Device Service", "Go", "Manages devices: registration, binding, state")
+  ContainerDb(deviceDb, "Device DB", "PostgreSQL", "Stores devices, serials, types, bindings")
+
+  Container(heatingService, "Heating Service", "Go", "Controls heating: on/off, temperature, schedules")
+  ContainerDb(heatingDb, "Heating DB", "PostgreSQL", "Stores heating modules, states, targets")
+
+  Container(telemetryService, "Telemetry Service", "Go", "Receives and stores sensor data")
+  ContainerDb(telemetryDb, "Telemetry DB", "TimescaleDB", "Time-series storage of sensor data")
+
+  Container(securityService, "Security Service", "Go", "Manages video cameras, gates, locks")
+  ContainerDb(securityDb, "Security DB", "PostgreSQL", "Stores access logs, camera states, door status")
+
+  Container(scenarioService, "Automation Service", "Go", "Runs automation scenarios based on events and time")
+  ContainerDb(scenarioDb, "Automation DB", "PostgreSQL", "Stores user-defined scenarios and triggers")
+
+  Container(messageBroker, "Message Broker", "MQTT / Kafka", "Asynchronous communication between services and devices")
+}
+
+' Взаимодействия пользователей
+Rel(user, webApp, "Uses", "HTTPS")
+Rel(user, mobileApp, "Uses", "HTTPS")
+Rel(technician, webApp, "Admin access for troubleshooting", "HTTPS")
+
+' Взаимодействия компонентов
+Rel(webApp, apiGateway, "Sends requests", "REST/HTTPS")
+Rel(mobileApp, apiGateway, "Sends requests", "REST/HTTPS")
+
+Rel(apiGateway, authService, "Routes auth requests", "REST")
+Rel(authService, authDb, "Reads/Writes", "JDBC")
+
+Rel(apiGateway, deviceService, "Routes device requests", "REST")
+Rel(deviceService, deviceDb, "Reads/Writes", "JDBC")
+
+Rel(apiGateway, heatingService, "Routes heating requests", "REST")
+Rel(heatingService, heatingDb, "Reads/Writes", "JDBC")
+Rel(heatingService, messageBroker, "Sends commands", "MQTT")
+
+Rel(apiGateway, telemetryService, "Routes telemetry queries", "REST")
+Rel(telemetryService, telemetryDb, "Reads/Writes", "Timescale")
+
+Rel(apiGateway, securityService, "Routes security commands", "REST")
+Rel(securityService, securityDb, "Reads/Writes", "JDBC")
+
+Rel(apiGateway, scenarioService, "Routes automation config", "REST")
+Rel(scenarioService, scenarioDb, "Reads/Writes", "JDBC")
+
+Rel(deviceService, messageBroker, "Sends/receives device data", "MQTT")
+Rel(telemetryService, messageBroker, "Consumes telemetry", "MQTT")
+Rel(scenarioService, messageBroker, "Consumes events, triggers actions", "MQTT")
+
+Rel(deviceService, vendorPlatform, "Fetches device metadata", "REST API")
+@enduml
