@@ -146,9 +146,7 @@
 
 Диаграмму контекста в модели C4 как монолитное приложение взаимодействует с внешним миром
 
-```markdown
 [Диаграмма контекста для монолита](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/context/Context.puml)
-```
 
 # Задание 2. Проектирование микросервисной архитектуры
 
