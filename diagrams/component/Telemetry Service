@@ -11,7 +11,6 @@ Container_Boundary(telemetryService, "Telemetry Service") {
   Component(telemetryDb, "Telemetry DB", "TimescaleDB", "Хранит показания датчиков в формате временных рядов")
 }
 
-' Взаимодействия
 Rel(telemetryIngestor, anomalyDetector, "Передаёт данные для анализа")
 Rel(telemetryIngestor, telemetryRepository, "Сохраняет сырые данные")
 Rel(anomalyDetector, notificationSender, "Уведомляет о нарушениях")
