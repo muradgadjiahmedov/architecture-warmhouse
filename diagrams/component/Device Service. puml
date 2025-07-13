@@ -1,0 +1,16 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(deviceService, "Device Service") {
+
+  Component(deviceAPI, "Device API", "Go", "REST API для управления устройствами")
+  Component(deviceManager, "Device Manager", "Go", "Обрабатывает регистрацию, привязку, обновление статуса устройств")
+  Component(deviceRegistry, "Device Registry", "Go", "Доступ к информации об устройствах в БД")
+  Component(deviceDb, "Device DB", "PostgreSQL", "Хранит устройства, типы, статусы, привязку к домам/комнатам")
+}
+
+' Взаимодействия компонентов
+Rel(deviceAPI, deviceManager, "Передаёт команды управления")
+Rel(deviceManager, deviceRegistry, "Чтение/запись данных об устройствах")
+Rel(deviceRegistry, deviceDb, "Чтение/запись", "SQL")
+@enduml
