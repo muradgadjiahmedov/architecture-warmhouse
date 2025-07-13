@@ -1,0 +1,20 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(authService, "Auth Service") {
+
+  Component(apiController, "Auth API Controller", "Go", "REST API для регистрации, входа, обновления токена")
+  Component(authManager, "Authentication Manager", "Go", "Проверка учётных данных и выдача токенов")
+  Component(tokenService, "Token Service", "Go / JWT", "Создание, валидация и обновление JWT-токенов")
+  Component(userRepository, "User Repository", "Go", "Доступ к данным пользователей в БД")
+  Component(rolePermissionService, "Role & Permission Service", "Go", "Назначение ролей и проверка доступа")
+  Component(authDb, "Auth DB", "PostgreSQL", "Хранит пользователей, роли и токены")
+}
+
+Rel(apiController, authManager, "Отправка запроса на аутентификацию")
+Rel(authManager, tokenService, "Создание/проверка токена")
+Rel(authManager, userRepository, "Поиск и проверка пользователя")
+Rel(apiController, rolePermissionService, "Проверка ролей и прав доступа")
+Rel(rolePermissionService, userRepository, "Получение информации о ролях")
+Rel(userRepository, authDb, "Чтение/запись пользователей и ролей", "JDBC")
+@enduml
