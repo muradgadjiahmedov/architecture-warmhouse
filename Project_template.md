@@ -170,11 +170,11 @@
 
 **Диаграмма кода (Code)**
 
-
+[Security Service](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/code/Security%20Service.puml)
 
 # Задание 3. Разработка ER-диаграммы
 
-Добавьте сюда ER-диаграмму. Она должна отражать ключевые сущности системы, их атрибуты и тип связей между ними.
+[ERD](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/ERD/erd.puml)
 
 # Задание 4. Работа с docker и docker-compose
 
