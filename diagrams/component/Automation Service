@@ -1,0 +1,21 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+Container_Boundary(automationService, "Automation (Scenario) Service") {
+
+  Component(scenarioAPI, "Scenario API", "Go", "REST API для создания и управления пользовательскими сценариями")
+  Component(triggerEngine, "Trigger Engine", "Go", "Определяет срабатывание сценариев по событиям/времени")
+  Component(actionExecutor, "Action Executor", "Go", "Выполняет действия над устройствами при срабатывании сценария")
+  Component(scenarioRepository, "Scenario Repository", "Go", "Инкапсулирует доступ к базе данных сценариев")
+  Component(scenarioDb, "Automation DB", "PostgreSQL", "Хранит сценарии, условия, действия и расписания")
+}
+
+' Взаимодействия компонентов
+Rel(scenarioAPI, scenarioRepository, "Создаёт/обновляет сценарии")
+Rel(triggerEngine, scenarioRepository, "Читает условия сценариев")
+Rel(triggerEngine, actionExecutor, "Передаёт команды для выполнения")
+Rel(scenarioRepository, scenarioDb, "Чтение/запись сценариев", "SQL")
+
+@enduml
