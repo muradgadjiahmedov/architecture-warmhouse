@@ -1,5 +1,5 @@
 @startuml
-!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+!include C4_Context.puml
 
 System(system, "Умный дом", "Центральная система управления отоплением и умными устройствами в домах")
 
