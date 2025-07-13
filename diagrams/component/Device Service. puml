@@ -9,7 +9,6 @@ Container_Boundary(deviceService, "Device Service") {
   Component(deviceDb, "Device DB", "PostgreSQL", "Хранит устройства, типы, статусы, привязку к домам/комнатам")
 }
 
-' Взаимодействия компонентов
 Rel(deviceAPI, deviceManager, "Передаёт команды управления")
 Rel(deviceManager, deviceRegistry, "Чтение/запись данных об устройствах")
 Rel(deviceRegistry, deviceDb, "Чтение/запись", "SQL")
