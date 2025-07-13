@@ -1,0 +1,20 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(telemetryService, "Telemetry Service") {
+
+  Component(telemetryIngestor, "Telemetry Ingestor", "Go", "Обработка входящих данных с устройств (MQTT Consumer)")
+  Component(telemetryAPI, "Telemetry API", "Go", "REST API для запроса данных телеметрии")
+  Component(anomalyDetector, "Anomaly Detector", "Go", "Обнаружение отклонений и выбросов")
+  Component(notificationSender, "Notification Sender", "Go", "Отправка уведомлений пользователям при отклонениях")
+  Component(telemetryRepository, "Telemetry Repository", "Go", "Работа с базой данных телеметрии")
+  Component(telemetryDb, "Telemetry DB", "TimescaleDB", "Хранит показания датчиков в формате временных рядов")
+}
+
+' Взаимодействия
+Rel(telemetryIngestor, anomalyDetector, "Передаёт данные для анализа")
+Rel(telemetryIngestor, telemetryRepository, "Сохраняет сырые данные")
+Rel(anomalyDetector, notificationSender, "Уведомляет о нарушениях")
+Rel(telemetryAPI, telemetryRepository, "Запрашивает исторические данные")
+Rel(telemetryRepository, telemetryDb, "Чтение/запись телеметрии", "SQL")
+@enduml
