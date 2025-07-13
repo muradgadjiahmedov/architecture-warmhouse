@@ -1,0 +1,93 @@
+@startuml
+left to right direction
+hide empty members
+
+!define primary_key(x) <b><color:#b8861b><&key></color> x</b>
+!define foreign_key(x) <color:#aaaaaa><&key></color> x
+!define column(x) <color:#efefef><&media-record></color> x
+
+entity auth_users {
+    primary_key(id): UUID
+    --
+    column(name): VARCHAR
+    column(email): VARCHAR
+    column(password_hash): VARCHAR
+    column(role): VARCHAR
+    column(created_at): TIMESTAMPTZ
+}
+
+entity device_devices {
+    primary_key(id): UUID
+    --
+    foreign_key(user_id): UUID
+    column(type): VARCHAR
+    column(serial_number): VARCHAR
+    column(location): VARCHAR
+    column(status): VARCHAR
+    column(installed_at): TIMESTAMPTZ
+}
+
+entity heating_modules {
+    primary_key(id): UUID
+    --
+    foreign_key(device_id): UUID
+    column(temperature_target): FLOAT
+    column(is_on): BOOLEAN
+    column(last_updated): TIMESTAMPTZ
+}
+
+entity telemetry_readings {
+    primary_key(id): UUID
+    --
+    foreign_key(device_id): UUID
+    column(sensor_type): VARCHAR
+    column(value): FLOAT
+    column(recorded_at): TIMESTAMPTZ
+}
+
+entity security_cameras {
+    primary_key(id): UUID
+    --
+    foreign_key(user_id): UUID
+    column(location): VARCHAR
+    column(is_online): BOOLEAN
+}
+
+entity security_camera_logs {
+    primary_key(id): UUID
+    --
+    foreign_key(camera_id): UUID
+    column(event_type): VARCHAR
+    column(event_time): TIMESTAMPTZ
+}
+
+entity automation_scenarios {
+    primary_key(id): UUID
+    --
+    foreign_key(user_id): UUID
+    column(name): VARCHAR
+    column(trigger_type): VARCHAR
+    column(condition): TEXT
+    column(action): TEXT
+    column(created_at): TIMESTAMPTZ
+}
+
+entity automation_triggers {
+    primary_key(id): UUID
+    --
+    foreign_key(scenario_id): UUID
+    column(event): VARCHAR
+    column(time_window): VARCHAR
+}
+
+device_devices::user_id }|--|| auth_users::id
+security_cameras::user_id }|--|| auth_users::id
+automation_scenarios::user_id }|--|| auth_users::id
+
+heating_modules::device_id }|--|| device_devices::id
+telemetry_readings::device_id }|--|| device_devices::id
+
+security_camera_logs::camera_id }|--|| security_cameras::id
+
+automation_triggers::scenario_id }|--|| automation_scenarios::id
+@enduml
