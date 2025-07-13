@@ -1,6 +1,6 @@
-@startuml
-
 !include ./C4_Context.puml
+
+@startuml
 
 System(system, "Умный дом", "Центральная система управления отоплением и умными устройствами в домах")
 
