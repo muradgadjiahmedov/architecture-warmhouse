@@ -1,0 +1,18 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(securityService, "Security Service") {
+
+  Component(securityAPI, "Security API", "Go", "REST API для управления безопасностью")
+  Component(accessController, "Access Controller", "Go", "Обработка команд: открыть/закрыть ворота, двери и т.п.")
+  Component(videoStreamHandler, "Video Stream Handler", "Go", "Работа с видеопотоками/снимками с камер")
+  Component(accessLogRepository, "Access Log Repository", "Go", "Работа с журналом доступа и статусами устройств")
+  Component(securityDb, "Security DB", "PostgreSQL", "Хранит события, статусы замков и камер")
+}
+
+Rel(securityAPI, accessController, "Передаёт команды управления")
+Rel(securityAPI, videoStreamHandler, "Запрашивает видеопотоки и снимки")
+Rel(accessController, accessLogRepository, "Запись событий")
+Rel(videoStreamHandler, accessLogRepository, "Чтение/запись состояния камер")
+Rel(accessLogRepository, securityDb, "Чтение/запись", "SQL")
+@enduml
