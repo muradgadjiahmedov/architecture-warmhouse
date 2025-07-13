@@ -150,19 +150,27 @@
 
 # Задание 2. Проектирование микросервисной архитектуры
 
-В этом задании вам нужно предоставить только диаграммы в модели C4. Мы не просим вас отдельно описывать получившиеся микросервисы и то, как вы определили взаимодействия между компонентами To-Be системы. Если вы правильно подготовите диаграммы C4, они и так это покажут.
-
 **Диаграмма контейнеров (Containers)**
 
-Добавьте диаграмму.
+[Диаграмма контейнеров](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/container/container.puml)
 
 **Диаграмма компонентов (Components)**
 
-Добавьте диаграмму для каждого из выделенных микросервисов.
+1) [Auth Service](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/component/Auth%20Service.puml)
+
+2) [Healting Service](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/component/Heating%20Service.puml)
+
+3) [Telemetry Service](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/component/Telemetry20Service.puml)
+
+4) [Automation Service](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/component/Automation20Service.puml)
+
+5) [Device Service](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/component/Device20Service.puml)
+
+6) [Security Service](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/component/Security20Service.puml)
 
 **Диаграмма кода (Code)**
 
-Добавьте одну диаграмму или несколько.
+
 
 # Задание 3. Разработка ER-диаграммы
 
