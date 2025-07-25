@@ -197,4 +197,4 @@ REST API, потому что микросервисы должны быстро
 
 ### 2. Документация API
 
-[YAML файл](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/diagrams/ERD/erd.puml](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/SmartHome.yaml)
+[YAML файл](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/SmartHome.yaml)
