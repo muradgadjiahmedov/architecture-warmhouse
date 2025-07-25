@@ -1,0 +1,100 @@
+openapi: 3.0.0
+info:
+  title: Smart Home Device API
+  version: 1.1.0
+  description: API для управления умными устройствами (получение, создание, управление)
+
+servers:
+  - url: http://localhost:8080
+    description: Локальный сервер smart_home-app
+
+paths:
+  /devices:
+    get:
+      summary: Получение списка всех устройств
+      responses:
+        '200':
+          description: Список устройств
+          content:
+            application/json:
+              example:
+                - id: 1
+                  type: thermostat
+                  status: online
+                  location: "Living Room"
+                - id: 2
+                  type: light
+                  status: offline
+                  location: "Kitchen"
+
+    post:
+      summary: Добавление нового устройства
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              type: "light"
+              location: "Bedroom"
+              status: "online"
+      responses:
+        '201':
+          description: Устройство добавлено
+          content:
+            application/json:
+              example:
+                id: 3
+                message: "Device created successfully"
+        '400':
+          description: Ошибка валидации данных
+
+  /devices/{id}:
+    get:
+      summary: Получение информации об устройстве
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Уникальный идентификатор устройства
+      responses:
+        '200':
+          description: Устройство найдено
+          content:
+            application/json:
+              example:
+                id: 42
+                type: thermostat
+                status: online
+                location: "Living Room"
+        '404':
+          description: Устройство не найдено
+
+  /devices/{id}/state:
+    put:
+      summary: Обновление состояния устройства
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              state: "off"
+      responses:
+        '200':
+          description: Состояние обновлено
+          content:
+            application/json:
+              example:
+                message: "Device turned off"
+        '400':
+          description: Неверный формат запроса
+        '404':
+          description: Устройство не найдено
+
