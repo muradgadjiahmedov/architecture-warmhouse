@@ -189,7 +189,7 @@
 # ✅ Задание 5. Создание и документирование API
 
 ### 1. Тип API
-REST
+REST API
 
 ### 1. Тип API
 
@@ -197,4 +197,4 @@ REST API, потому что микросервисы должны быстро
 
 ### 2. Документация API
 
-[YAML файл](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/SmartHome.yaml)
+[YAML файл (Swagger)](https://github.com/muradgadjiahmedov/architecture-warmhouse/blob/main/SmartHome.yaml)
